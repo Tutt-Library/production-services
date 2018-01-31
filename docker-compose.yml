@@ -19,11 +19,33 @@ services:
   etd:
     build:
       context: ccetd/.
-      dockerfile: Dockerfile   
+      dockerfile: Dockerfile 
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8095:8095"
+    networks:
+      - webnet
   scholarship:
     build:
       context: cc-scholarship-graph/.
       dockerfile: Dockerfile  
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "7725:7725"
   web:
     build:
       context: .
