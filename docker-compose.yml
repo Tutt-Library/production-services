@@ -2,20 +2,20 @@ version: "3"
 services:
   semantic_server:
     image: knowledgelinks/semantic-server
-      deploy:
-        replicas: 3
-        resources:
-          limits:
-            cpus: "0.2"
-            memory: 2G
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: 2G
         restart_policy:
           condition: on-failure
-      ports:
-        - "8080:8080"
-        - "9200:9200"
-        - "9999:9999"
-      networks:
-        - webnet
+    ports:
+      - "8080:8080"
+      - "9200:9200"
+      - "9999:9999"
+    networks:
+      - webnet
   etd:
     build:
       context: ccetd/.
@@ -32,6 +32,7 @@ services:
       - "8095:8095"
     networks:
       - webnet
+
   scholarship:
     build:
       context: cc-scholarship-graph/.
@@ -46,22 +47,27 @@ services:
         condition: on-failure
     ports:
       - "7725:7725"
+    networks:
+      - webnet
+
   web:
     build:
       context: .
       dockerfile: DockerfileNginx
     deploy:
-         replicas: 2
-         resources:
-           limits:
-             cpus: "0.1"
-             memory: 50M
-         restart_policy:
-           condition: on-failure
-       ports: 
-          - "80:80"
-       networks:
-          - webnet
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+      ports: 
+        - "80:80"
+        - "443:443"
+      networks:
+        - webnet
+
 networks:
   webnet:
       
