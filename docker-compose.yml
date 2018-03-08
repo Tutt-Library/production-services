@@ -7,22 +7,28 @@ services:
       - "9999:9999"
       - "9200:9200"
 
-  etd:
-    image: tuttlibrary/digitalcc
+  digital_cc:
+    image: jermnelson/semantic-server-core:dev
     ports:
-      - "8000:8000"
+      - "8080:8080"
+      - "9999:9999"
+
+  etd:
+    image: tuttlibrary/ccetd
+    ports:
+      - "8095:8095"
 
   scholarship:
     image: tuttlibrary/scholarship-graph 
     ports:
       - "7225:7225"
 
-  marcbatch:
+  marc_batch:
     image: tuttlibrary/marc-batch
     ports:
       - "20157:20157"
 
-  fedorautilities:
+  fedora_utilities:
     image: tuttlibrary/fedora-utilities
     ports:
       - "9455:9455"
