@@ -1,20 +1,31 @@
-version: "3"
+version: "2"
 services:
   semanticserver:
-    image: jermnelson/semantic-server-core:dev
+    image: knowledgelinks/semantic-server
     ports:
       - "8080:8080"
       - "9999:9999"
+      - "9200:9200"
 
   etd:
-    image: tuttlibrary/ccetd
+    image: tuttlibrary/digitalcc
     ports:
-      - "8095:8095"
+      - "8000:8000"
 
   scholarship:
     image: tuttlibrary/scholarship-graph 
     ports:
       - "7225:7225"
+
+  marcbatch:
+    image: tuttlibrary/marc-batch
+    ports:
+      - "20157:20157"
+
+  fedorautilities:
+    image: tuttlibrary/fedora-utilities
+    ports:
+      - "9455:9455"
 
   web:
     image: tuttlibrary/production-web
