@@ -1,6 +1,6 @@
 version: "2"
 services:
-  semanticserver:
+  semantic_server:
     image: knowledgelinks/semantic-server
     ports:
       - "8080:8080"
@@ -8,20 +8,16 @@ services:
       - "9200:9200"
 
   digital_cc:
-    image: jermnelson/semantic-server-core:dev
+    image: tuttlibrary/digital-cc
     ports:
-      - "8080:8080"
-      - "9999:9999"
+      - "8048:5000"
 
-  etd:
-    image: tuttlibrary/ccetd
-    ports:
-      - "8095:8095"
 
   scholarship:
     image: tuttlibrary/scholarship-graph 
     ports:
       - "7225:7225"
+    restart: always
 
   marc_batch:
     image: tuttlibrary/marc-batch
