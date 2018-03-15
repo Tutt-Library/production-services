@@ -6,23 +6,31 @@ services:
       - "8080:8080"
       - "9999:9999"
       - "9200:9200"
-    networks:
-      - new
 
   digital_cc:
     image: tuttlibrary/digital-cc
     ports:
-      - "5000:5000"
-    networks:
-      - new
+      - "8048:5000"
+
+
+  scholarship:
+    image: tuttlibrary/scholarship-graph 
+    ports:
+      - "7225:7225"
+    restart: always
+
+  marc_batch:
+    image: tuttlibrary/marc-batch
+    ports:
+      - "20157:20157"
+
+  fedora_utilities:
+    image: tuttlibrary/fedora-utilities
+    ports:
+      - "9455:9455"
 
   web:
     image: tuttlibrary/production-web
     ports: 
       - "80:80"
       - "443:443"
-    networks:
-      - new
-
-networks:
-  new:
