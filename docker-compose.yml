@@ -6,6 +6,8 @@ services:
       - "8080:8080"
       - "9999:9999"
       - "9200:9200"
+    volumes:
+      - /opt/dacc_search/elasticsearch:/opt/elasticsearch/data
     networks:
       - new
 
@@ -13,6 +15,14 @@ services:
     image: tuttlibrary/digital-cc
     ports:
       - "5000:5000"
+    networks:
+      - new
+
+
+  scholarship:
+    image: tuttlibrary/scholarship-graph
+    ports:
+      - "7225:7225"
     networks:
       - new
 
